@@ -68,7 +68,8 @@ class Thought:
         query = "SELECT thoughts.thought, thoughts.id, users.first_name, users.id AS user, likes.thought_id, COUNT(likes.thought_id) AS likes FROM thoughts "\
                 "LEFT JOIN users ON users.id = thoughts.user_id "\
                 "LEFT JOIN likes ON thoughts.id = likes.thought_id "\
-                "GROUP by thoughts.id;"
+                "GROUP by thoughts.id "\
+                "ORDER BY COUNT(likes.thought_id) DESC;"
         results = connectToMySQL(cls.db_name).query_db(query)
         print(results)
         return results
